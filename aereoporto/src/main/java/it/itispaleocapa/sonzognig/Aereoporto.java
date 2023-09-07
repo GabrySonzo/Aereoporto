@@ -1,6 +1,7 @@
 package it.itispaleocapa.sonzognig;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 
 public class Aereoporto {
     
@@ -32,7 +33,7 @@ public class Aereoporto {
     }
 
     public LinkedList<Cliente> getClientiByName(String nome, String cognome) {
-        LinkedLsit<Cliente> clientiByName = new LinkedList<Cliente>();
+        LinkedList<Cliente> clientiByName = new LinkedList<Cliente>();
         clienti.values().stream().filter(c -> c.getNome().equals(nome) && c.getCognome().equals(cognome)).forEach(c -> clientiByName.add(c));
         return clientiByName;
     }

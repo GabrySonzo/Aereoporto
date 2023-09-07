@@ -22,4 +22,8 @@ public class Volo {
         this.posti = posti;
         this.costoBiglietto = costoBiglietto;
     }
+
+    public int getCodiceVolo() {
+        return codiceVolo;
+    }
 }
