@@ -1,18 +1,21 @@
 package it.itispaleocapa.sonzognig;
 
 public class Prenotazione {
-    int codiceCliente;
-    int codiceVolo;
-    static int codicePrenotazione=0;
-    int nBagagli;
-    int pesoBagagli;
 
+    private int codicePrenotazione;
+    private int codiceCliente;
+    private int codiceVolo;
+    private int nBagagli;
+    private int pesoBagagli;
+    private static int counter=0;
+    
     public Prenotazione(int codiceCliente, int codiceVolo, int nBagagli, int pesoBagagli) {
+        counter++;
         this.codiceCliente = codiceCliente;
         this.codiceVolo = codiceVolo;
         this.nBagagli = nBagagli;
         this.pesoBagagli = pesoBagagli;
-        codicePrenotazione++;
+        codicePrenotazione = counter;
     }
 
     public int getCodicePrenotazione() {

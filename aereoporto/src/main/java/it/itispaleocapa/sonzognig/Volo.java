@@ -4,16 +4,19 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Volo {
-    static int codiceVolo=0;
-    String partenza;
-    String destinazione;
-    LocalDate dataVolo;
-    LocalTime oraPartenza;
-    LocalTime oraArrivo;
-    int posti;
-    int costoBiglietto;
+    
+    private int codiceVolo;
+    private String partenza;
+    private String destinazione;
+    private LocalDate dataVolo;
+    private LocalTime oraPartenza;
+    private LocalTime oraArrivo;
+    private int posti;
+    private int costoBiglietto;
+    private static int counter=0;
+
     public Volo(String partenza, String destinazione, LocalDate dataVolo, LocalTime oraPartenza, LocalTime oraArrivo, int posti, int costoBiglietto) {
-        codiceVolo++;
+        counter++;
         this.partenza = partenza;
         this.destinazione = destinazione;
         this.dataVolo = dataVolo;
@@ -21,6 +24,7 @@ public class Volo {
         this.oraArrivo = oraArrivo;
         this.posti = posti;
         this.costoBiglietto = costoBiglietto;
+        codiceVolo = counter;
     }
 
     public int getCodiceVolo() {

@@ -21,18 +21,18 @@ class AppTest {
         assertEquals("Italia", cliente.getNazioneNascita());
         assertEquals("Bergamo", cliente.getCittaNascita());
         assertEquals(LocalDate.of(2000, 1, 1), cliente.getDataNascita());
-        assertEquals(1, cliente.getCodiceCliente());
     }
 
+    @Test
     void testVolo() {
         Volo volo = new Volo("Bergamo", "Roma", LocalDate.of(2021, 1, 1), LocalTime.of(12, 0), LocalTime.of(13, 0), 100, 100);
         assertEquals("Bergamo", volo.getPartenza());
         assertEquals("Roma", volo.getDestinazione());
         assertEquals(LocalDate.of(2021, 1, 1), volo.getData());
         assertEquals(LocalTime.of(12, 0), volo.getOra());
-        assertEquals(100, volo.getCodiceVolo());
     }
 
+    @Test
     void testPrentazione() {
         Prenotazione prenotazione = new Prenotazione(1, 1, 1, 1);
         assertEquals(1, prenotazione.getCodiceCliente());
@@ -40,12 +40,14 @@ class AppTest {
         assertEquals(1, prenotazione.getCodicePrenotazione());
     }
 
+    @Test
     void testAggiungiCliente() {
         Cliente cliente = new Cliente("Giovanni", "Sonzogni", "Italia", "Bergamo", LocalDate.of(2000, 1, 1));
         aereoporto.aggiungiCliente(cliente);
         assertEquals(aereoporto.clienti.size(), 1);
     }
 
+    @Test
     void testEliminaCliente() {
         Cliente cliente = new Cliente("Giovanni", "Sonzogni", "Italia", "Bergamo", LocalDate.of(2000, 1, 1));
         aereoporto.aggiungiCliente(cliente);
@@ -53,6 +55,7 @@ class AppTest {
         assertEquals(aereoporto.clienti.size(), 0);
     }
 
+    @Test
     void testModificaCliente() {
         Cliente cliente = new Cliente("Luca", "Galizzi", "Pakistan", "Baku", LocalDate.of(2001, 1, 1));
         aereoporto.aggiungiCliente(cliente);
@@ -64,24 +67,28 @@ class AppTest {
         assertEquals(aereoporto.clienti.get(cliente.getCodiceCliente()).getDataNascita(), LocalDate.of(2000, 1, 1));
     }
 
+    @Test
     void testGetClienteByCode() {
         Cliente cliente = new Cliente("Giovanni", "Sonzogni", "Italia", "Bergamo", LocalDate.of(2000, 1, 1));
         aereoporto.aggiungiCliente(cliente);
         assertEquals(aereoporto.getClienteByCode(cliente.getCodiceCliente()), cliente);
     }
 
+    @Test
     void testGetClientiByName() {
         Cliente cliente = new Cliente("Giovanni", "Sonzogni", "Italia", "Bergamo", LocalDate.of(2000, 1, 1));
         aereoporto.aggiungiCliente(cliente);
         assertEquals(aereoporto.getClientiByName("Giovanni", "Sonzogni").get(0), cliente);
     }
 
+    @Test
     void aggiungiVoloTest() {
         Volo volo = new Volo("Bergamo", "Roma", LocalDate.of(2021, 1, 1), LocalTime.of(12, 0), LocalTime.of(13, 0), 100, 100);
         aereoporto.aggiungiVolo(volo);
         assertEquals(aereoporto.voli.size(), 1);
     }
 
+    @Test
     void eliminaVoloTest() {
         Volo volo = new Volo("Bergamo", "Roma", LocalDate.of(2021, 1, 1), LocalTime.of(12, 0), LocalTime.of(13, 0), 100, 100);
         aereoporto.aggiungiVolo(volo);
@@ -89,6 +96,7 @@ class AppTest {
         assertEquals(aereoporto.voli.size(), 0);
     }
 
+    @Test
     void modificaVoloTest() {
         Volo volo = new Volo("Milano", "Napoli", LocalDate.of(2021, 2, 1), LocalTime.of(12, 0), LocalTime.of(15, 0), 110, 10);
         aereoporto.aggiungiVolo(volo);
@@ -99,24 +107,28 @@ class AppTest {
         assertEquals(aereoporto.voli.get(volo.getCodiceVolo()).getOra(), LocalTime.of(12, 0));
     }
 
+    @Test
     void getVoloByCodeTest() {
         Volo volo = new Volo("Bergamo", "Roma", LocalDate.of(2021, 1, 1), LocalTime.of(12, 0), LocalTime.of(13, 0), 100, 100);
         aereoporto.aggiungiVolo(volo);
         assertEquals(aereoporto.getVoloByCode(volo.getCodiceVolo()), volo);
     }
 
+    @Test
     void getVoloByDatiTest() {
         Volo volo = new Volo("Bergamo", "Roma", LocalDate.of(2021, 1, 1), LocalTime.of(12, 0), LocalTime.of(13, 0), 100, 100);
         aereoporto.aggiungiVolo(volo);
         assertEquals(aereoporto.getVoloByDati("Roma", "Bergamo", LocalDate.of(2021, 1, 1), LocalTime.of(12, 0)), volo);
     }
 
+    @Test
     void aggiungiPrenotazioneTest() {
         Prenotazione prenotazione = new Prenotazione(1, 1, 1, 1);
         aereoporto.aggiungiPrenotazione(prenotazione);
         assertEquals(aereoporto.prenotazioni.size(), 1);
     }
     
+    @Test
     void eliminaPrenotazioneTest() {
         Prenotazione prenotazione = new Prenotazione(1, 1, 1, 1);
         aereoporto.aggiungiPrenotazione(prenotazione);
@@ -124,6 +136,7 @@ class AppTest {
         assertEquals(aereoporto.prenotazioni.size(), 0);
     }
 
+    @Test
     void modificaPrenotazioneTest() {
         Prenotazione prenotazione = new Prenotazione(1, 1, 1, 1);
         aereoporto.aggiungiPrenotazione(prenotazione);
@@ -132,26 +145,41 @@ class AppTest {
         assertEquals(aereoporto.prenotazioni.get(prenotazione.getCodicePrenotazione()).getPesoBagagli(), 1);
     }
 
+    @Test
     void getPrenotazioniByClienteTest() {
-        Prenotazione prenotazione = new Prenotazione(1, 1, 1, 1);
+        Cliente cliente = new Cliente("Giovanni", "Sonzogni", "Italia", "Bergamo", LocalDate.of(2000, 1, 1));
+        aereoporto.aggiungiCliente(cliente);
+        Cliente cliente2 = new Cliente("Luca", "Galizzi", "Pakistan", "Baku", LocalDate.of(2001, 1, 1));
+        aereoporto.aggiungiCliente(cliente2);
+        Volo volo = new Volo("Bergamo", "Roma", LocalDate.of(2021, 1, 1), LocalTime.of(12, 0), LocalTime.of(13, 0), 100, 100);
+        aereoporto.aggiungiVolo(volo);
+        Prenotazione prenotazione = new Prenotazione(cliente.getCodiceCliente(), volo.getCodiceVolo(), 1, 1);
         aereoporto.aggiungiPrenotazione(prenotazione);
-        Prenotazione prenotazione2 = new Prenotazione(2, 1, 1, 1);
+        Prenotazione prenotazione2 = new Prenotazione(cliente2.getCodiceCliente(), volo.getCodiceVolo(), 1, 1);
         aereoporto.aggiungiPrenotazione(prenotazione2);
-        Prenotazione prenotazione3 = new Prenotazione(1, 1, 1, 1);
+        Prenotazione prenotazione3 = new Prenotazione(cliente.getCodiceCliente(), volo.getCodiceVolo(), 1, 1);
         aereoporto.aggiungiPrenotazione(prenotazione3);
-        assertEquals(aereoporto.getPrenotazioniByCliente(1).size(), 2);
+        assertEquals(aereoporto.getPrenotazioniByCliente(cliente.getCodiceCliente()).size(), 2);
     }
 
+    @Test
     void getPrenotazioniByVoloTest() {
-        Prenotazione prenotazione = new Prenotazione(1, 1, 1, 1);
+        Cliente cliente = new Cliente("Giovanni", "Sonzogni", "Italia", "Bergamo", LocalDate.of(2000, 1, 1));
+        aereoporto.aggiungiCliente(cliente);
+        Volo volo = new Volo("Bergamo", "Roma", LocalDate.of(2021, 1, 1), LocalTime.of(12, 0), LocalTime.of(13, 0), 100, 100);
+        aereoporto.aggiungiVolo(volo);
+        Volo volo2 = new Volo("Milano", "Roma", LocalDate.of(2021, 1, 1), LocalTime.of(12, 0), LocalTime.of(13, 0), 100, 100);
+        aereoporto.aggiungiVolo(volo2);
+        Prenotazione prenotazione = new Prenotazione(cliente.getCodiceCliente(), volo.getCodiceVolo(), 1, 1);
         aereoporto.aggiungiPrenotazione(prenotazione);
-        Prenotazione prenotazione2 = new Prenotazione(1, 2, 1, 1);
+        Prenotazione prenotazione2 = new Prenotazione(cliente.getCodiceCliente(), volo2.getCodiceVolo(), 1, 1);
         aereoporto.aggiungiPrenotazione(prenotazione2);
-        Prenotazione prenotazione3 = new Prenotazione(1, 1, 1, 1);
+        Prenotazione prenotazione3 = new Prenotazione(cliente.getCodiceCliente(), volo.getCodiceVolo(), 1, 1);
         aereoporto.aggiungiPrenotazione(prenotazione3);
-        assertEquals(aereoporto.getPrenotazioniByVolo(1).size(), 2);
+        assertEquals(aereoporto.getPrenotazioniByVolo(volo.getCodiceVolo()).size(), 2);
     }
     
+    @Test
     void testClienteNonEsistenteException() {
         assertThrows(ClienteNonEsistenteException.class, () -> aereoporto.getClienteByCode(1));
         assertThrows(ClienteNonEsistenteException.class, () -> aereoporto.eliminaCliente(1));
@@ -159,6 +187,7 @@ class AppTest {
         assertThrows(ClienteNonEsistenteException.class, () -> aereoporto.getClientiByName("Giovanni", "Sonzogni"));
     }
 
+    @Test
     void testVoloNonEsistenteException() {
         assertThrows(VoloNonEsistenteException.class, () -> aereoporto.getVoloByCode(1));
         assertThrows(VoloNonEsistenteException.class, () -> aereoporto.eliminaVolo(1));
@@ -166,13 +195,19 @@ class AppTest {
         assertThrows(VoloNonEsistenteException.class, () -> aereoporto.getVoloByDati("Roma", "Bergamo", LocalDate.of(2021, 1, 1), LocalTime.of(12, 0)));
     }
 
+    @Test
     void testPrenotazioneNonEsistenteException() {
         assertThrows(PrenotazioneNonEsistenteException.class, () -> aereoporto.eliminaPrenotazione(1, 1));
         assertThrows(PrenotazioneNonEsistenteException.class, () -> aereoporto.modificaPrenotazione(1, 1, 1, 1));
     }
 
+    @Test
     void testNessunaPrenotazioneException() {
-        assertThrows(NessunaPrenotazioneException.class, () -> aereoporto.getPrenotazioniByCliente(1));
-        assertThrows(NessunaPrenotazioneException.class, () -> aereoporto.getPrenotazioniByVolo(1));
+        Cliente cliente = new Cliente("Giovanni", "Sonzogni", "Italia", "Bergamo", LocalDate.of(2000, 1, 1));
+        Volo volo = new Volo("Bergamo", "Roma", LocalDate.of(2021, 1, 1), LocalTime.of(12, 0), LocalTime.of(13, 0), 100, 100);
+        aereoporto.aggiungiCliente(cliente);
+        aereoporto.aggiungiVolo(volo);
+        assertThrows(NessunaPrenotazioneException.class, () -> aereoporto.getPrenotazioniByCliente(cliente.getCodiceCliente()));
+        assertThrows(NessunaPrenotazioneException.class, () -> aereoporto.getPrenotazioniByVolo(volo.getCodiceVolo()));
     }
 }

@@ -1,9 +1,14 @@
 package it.itispaleocapa.sonzognig;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.ByteBuffer;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.stream.Stream;
 
 public class Aereoporto {
     
@@ -70,10 +75,9 @@ public class Aereoporto {
     }
 
     public Volo getVoloByDati(String destinazione, String partenza, LocalDate dataVolo, LocalTime oraPartenza) {
-        Volo volo = voli.values().stream().filter(v -> v.getDestinazione().equals(destinazione) && v.getPartenza().equals(partenza) && v.getData().equals(dataVolo) && v.getOra().equals(oraPartenza)).findFirst().get();
-        if(volo == null)
+        if(!voli.values().stream().anyMatch(v -> v.getDestinazione().equals(destinazione) && v.getPartenza().equals(partenza) && v.getData().equals(dataVolo) && v.getOra().equals(oraPartenza)))
             throw new VoloNonEsistenteException();
-        return volo;
+        return voli.values().stream().filter(v -> v.getDestinazione().equals(destinazione) && v.getPartenza().equals(partenza) && v.getData().equals(dataVolo) && v.getOra().equals(oraPartenza)).findFirst().get();
     }
 
     public void aggiungiPrenotazione(Prenotazione prenotazione) {
